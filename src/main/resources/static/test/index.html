@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+    <title>Processes</title>
+
+    <style>
+        body {
+            color: #d3d3d3;
+            font: 12pt arial;
+            background-color: #222222;
+        }
+
+        #mynetwork {
+            width: 800px;
+            height: 800px;
+            border: 1px solid #444444;
+            background-color: #222222;
+        }
+    </style>
+
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/vis.min.js"></script>
+    <link href="../css/vis-network.min.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+<div id="mynetwork"></div>
+
+<script>
+
+    $(function() {
+        $.ajax({
+            url: '/api/processes',
+            type: 'GET',
+            contentType: "application/json; charset=utf-8",
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+                render(data);
+            }
+        });
+    });
+
+    function render(nodes) {
+
+        var container = document.getElementById('mynetwork');
+        var data = {
+            nodes: nodes
+        };
+        var options = {
+            nodes: {
+                shape: 'dot',
+                size: 30,
+                font: {
+                    size: 32,
+                    color: '#ffffff'
+                },
+                borderWidth: 2
+            }
+        };
+        network = new vis.Network(container, data, options);
+
+        network.on("click", function(params) {
+            window.location.href = "task.html";
+        });
+
+    }
+
+</script>
+</body>
+</html>
