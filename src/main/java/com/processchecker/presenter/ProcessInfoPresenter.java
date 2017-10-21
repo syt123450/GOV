@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableAutoConfiguration
 @RestController
 @RequestMapping("/api")
-public class Presenter {
+public class ProcessInfoPresenter {
 
     private Gson gson = new GsonBuilder().create();
 

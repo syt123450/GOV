@@ -30,6 +30,8 @@
 
 <script>
 
+    var taskData;
+
     $(function() {
         $.ajax({
             url: '/api/tasks',
@@ -38,6 +40,7 @@
             async: true,
             dataType: 'json',
             success: function (data) {
+                taskData = data;
                 render(data);
             }
         });
