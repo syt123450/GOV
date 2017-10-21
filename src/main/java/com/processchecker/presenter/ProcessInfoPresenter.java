@@ -35,5 +35,4 @@ public class ProcessInfoPresenter {
 
         return gson.toJson(processDataHandler.getTasksInfo(processName));
     }
-
 }

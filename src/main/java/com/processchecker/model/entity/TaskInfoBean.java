@@ -13,6 +13,6 @@ public class TaskInfoBean {
 
     List<PointEntityBean> taskPoints;
     List<RelationBean> taskRelations;
-    List<List<PointEntityBean>> processes;
+    List<List<PointEntityBean>> processors;
     List<List<RelationBean>> processTaskRelation;
 }

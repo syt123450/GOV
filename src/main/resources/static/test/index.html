@@ -10,11 +10,26 @@
             background-color: #222222;
         }
 
-        #mynetwork {
+        #network1 {
             width: 800px;
-            height: 800px;
+            height: 300px;
             border: 1px solid #444444;
             background-color: #222222;
+        }
+
+        #network2 {
+            width: 800px;
+            height: 300px;
+            border: 1px solid #444444;
+            background-color: #e2e4e6;
+        }
+
+
+        #showAll {
+            width: 100px;
+            height: 20px;
+            background: red;
+            color: white;
         }
     </style>
 
@@ -25,12 +40,15 @@
 </head>
 
 <body>
-
-<div id="mynetwork"></div>
+<div id="showAll">show All</div>
+<div id="network1"></div>
+<div id="network2"></div>
 
 <script>
 
-    $(function() {
+    var processNetwork, taskNetwork, tasksInfo;
+
+    $(function () {
         $.ajax({
             url: '/api/processes',
             type: 'GET',
@@ -38,16 +56,22 @@
             async: true,
             dataType: 'json',
             success: function (data) {
-                render(data);
+                createProcessDiagram(data);
             }
+        });
+        
+        $("#showAll").click(function() {
+            createAllProcessorInfo();
         });
     });
 
-    function render(nodes) {
+    function createProcessDiagram(nodesinfo) {
 
-        var container = document.getElementById('mynetwork');
+//        var nodesinfo = [{id: 0, label: "hihi", group: 3}, {id: 1, label: "hello", group: 4}];
+
+        var container = document.getElementById('network1');
         var data = {
-            nodes: nodes
+            nodes: nodesinfo
         };
         var options = {
             nodes: {
@@ -60,12 +84,95 @@
                 borderWidth: 2
             }
         };
-        network = new vis.Network(container, data, options);
+        processNetwork = new vis.Network(container, data, options);
 
-        network.on("click", function(params) {
-            window.location.href = "task.html";
+        processNetwork.on("click", function (params) {
+            if (params.nodes.length > 0) {
+
+                var processName = processNetwork.body.data.nodes._data[params.nodes[0]].label;
+                getTasksInfo(processName);
+            }
+        });
+    }
+
+//    var nodesinfo = [{id: 0, label: "hihi", group: 3}, {id: 1, label: "hello", group: 4}];
+
+    function getTasksInfo(processName) {
+        $.ajax({
+            url: '/api/tasks/',
+            type: 'GET',
+            contentType: "application/json; charset=utf-8",
+            async: true,
+            dataType: 'json',
+            success: function (data) {
+                tasksInfo = data;
+                createTasksDiagram();
+            }
+        });
+    }
+
+    function createTasksDiagram() {
+
+        var container = document.getElementById('network2');
+        var data = {
+            nodes: tasksInfo.taskPoints,
+            edges: tasksInfo.taskRelations
+        };
+        var options = {
+            nodes: {
+                shape: 'dot',
+                size: 30,
+                font: {
+                    size: 32,
+                    color: '#ffffff'
+                },
+                borderWidth: 2
+            }
+        };
+        taskNetwork = new vis.Network(container, data, options);
+
+        taskNetwork.on("click", function (params) {
+
+            if (params.nodes.length > 0) {
+                console.log(params.nodes[0]);
+                createOneProcessorInfo(params.nodes[0]);
+            }
+        });
+    }
+
+    function createOneProcessorInfo(id) {
+//        var processorsPoints = tasksInfo.processors[id];
+        var newPoints = tasksInfo.taskPoints.concat(tasksInfo.processors[id]);
+        var newRelations = tasksInfo.taskRelations.concat(tasksInfo.processTaskRelation[id]);
+
+        taskNetwork.setData({
+            nodes: newPoints,
+            edges: newRelations
+        });
+    }
+
+    function createAllProcessorInfo() {
+
+        var newPoints = tasksInfo.taskPoints.concat();
+//        for (var i = 0; i < tasksInfo.processors.length; i++) {
+//            newPoints = newPoints.concat(tasksInfo.processors[i]);
+//        }
+        tasksInfo.processors.forEach(function (processorInfo) {
+            newPoints = newPoints.concat(processorInfo);
         });
 
+        var newRelations = tasksInfo.taskRelations.concat();
+//        for (var i = 0; i < tasksInfo.processTaskRelation.length; i++) {
+//            newRelations = newRelations.concat(tasksInfo.processTaskRelation[i]);
+//        }
+        tasksInfo.processTaskRelation.forEach(function (relations) {
+            newRelations = newRelations.concat(relations);
+        });
+
+        taskNetwork.setData({
+            nodes: newPoints,
+            edges: newRelations
+        });
     }
 
 </script>

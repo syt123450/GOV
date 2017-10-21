@@ -11,6 +11,7 @@ import java.util.List;
 /**
  * Created by ss on 2017/10/19.
  */
+
 public class ProcessDataHandler {
 
     public List<PointEntityBean> getProcessesInfo() {
@@ -89,7 +90,7 @@ public class ProcessDataHandler {
             processorTaskRelations.add(processTaskRelation);
         }
 
-        taskInfoBean.setProcesses(processors);
+        taskInfoBean.setProcessors(processors);
         taskInfoBean.setProcessTaskRelation(processorTaskRelations);
 
         return taskInfoBean;
