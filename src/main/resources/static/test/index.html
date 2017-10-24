@@ -59,15 +59,13 @@
                 createProcessDiagram(data);
             }
         });
-        
+
         $("#showAll").click(function() {
             createAllProcessorInfo();
         });
     });
 
     function createProcessDiagram(nodesinfo) {
-
-//        var nodesinfo = [{id: 0, label: "hihi", group: 3}, {id: 1, label: "hello", group: 4}];
 
         var container = document.getElementById('network1');
         var data = {
@@ -94,8 +92,6 @@
             }
         });
     }
-
-//    var nodesinfo = [{id: 0, label: "hihi", group: 3}, {id: 1, label: "hello", group: 4}];
 
     function getTasksInfo(processName) {
         $.ajax({
@@ -141,7 +137,7 @@
     }
 
     function createOneProcessorInfo(id) {
-//        var processorsPoints = tasksInfo.processors[id];
+
         var newPoints = tasksInfo.taskPoints.concat(tasksInfo.processors[id]);
         var newRelations = tasksInfo.taskRelations.concat(tasksInfo.processTaskRelation[id]);
 
@@ -154,17 +150,11 @@
     function createAllProcessorInfo() {
 
         var newPoints = tasksInfo.taskPoints.concat();
-//        for (var i = 0; i < tasksInfo.processors.length; i++) {
-//            newPoints = newPoints.concat(tasksInfo.processors[i]);
-//        }
         tasksInfo.processors.forEach(function (processorInfo) {
             newPoints = newPoints.concat(processorInfo);
         });
 
         var newRelations = tasksInfo.taskRelations.concat();
-//        for (var i = 0; i < tasksInfo.processTaskRelation.length; i++) {
-//            newRelations = newRelations.concat(tasksInfo.processTaskRelation[i]);
-//        }
         tasksInfo.processTaskRelation.forEach(function (relations) {
             newRelations = newRelations.concat(relations);
         });
