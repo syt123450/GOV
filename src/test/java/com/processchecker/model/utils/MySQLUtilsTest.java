@@ -2,16 +2,14 @@ package com.processchecker.model.utils;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
- * Created by ss on 2017/10/21.
+ * Created by ss on 2017/10/24.
  */
 public class MySQLUtilsTest {
 
     @Test
-    public void testGetTasksProcessor() {
+    public void testGetDepartmentUrl() {
         MySQLUtils mySQLUtils = new MySQLUtils();
-        System.out.println(mySQLUtils.getTasksProcessor("Submit Request"));
+        System.out.println(mySQLUtils.getDepartmentUrl("mockDepartment"));
     }
 }

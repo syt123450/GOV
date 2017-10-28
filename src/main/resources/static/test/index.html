@@ -59,7 +59,7 @@
                 createProcessDiagram(data);
             }
         });
-
+        
         $("#showAll").click(function() {
             createAllProcessorInfo();
         });
@@ -76,7 +76,7 @@
                 shape: 'dot',
                 size: 30,
                 font: {
-                    size: 18,
+                    size: 32,
                     color: '#ffffff'
                 },
                 borderWidth: 2
@@ -119,7 +119,7 @@
                 shape: 'dot',
                 size: 30,
                 font: {
-                    size: 16,
+                    size: 32,
                     color: '#ffffff'
                 },
                 borderWidth: 2
@@ -130,7 +130,6 @@
         taskNetwork.on("click", function (params) {
 
             if (params.nodes.length > 0) {
-                console.log(params.nodes[0]);
                 createOneProcessorInfo(params.nodes[0]);
             }
         });

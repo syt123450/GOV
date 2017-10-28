@@ -1,0 +1,183 @@
+@charset "utf-8";
+/* CSS Document */
+/*---Initial---*/
+/*--------------------------
+    Full Screen
+    Min size
+  --------------------------*/
+html, body{
+    display:block;
+    margin: 0;
+    padding: 0;
+    height:100%;
+    width:100%;
+
+    overflow: hidden;
+    text-align:center;
+}
+ul,ol,li,p,div,dl,dt,dd,img,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,blockquote,th,td{
+    margin: 0;
+    padding: 0;
+}
+
+ol,ul{
+    list-style:none;
+    list-style-type: none;
+}
+a{
+    text-decoration:none;
+}
+.wrap{
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    min-width: 1370px;
+    min-height: 800px;
+    background-color: #E1E6E9;
+}
+.holder {
+    height: 100%
+}
+.clear{
+    both:clear;
+}
+/*---Main Style---*/
+.left_menu {
+    float:left;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 100%;
+    width: 20%;
+    min-width: 300px;
+    background-color: #191C20;
+}
+.user-box {
+    display:table;
+    height:150px;
+    width: 100%;
+}
+.user-ico {
+    display:table-cell;
+    height: 100%;
+    width: 100px;
+    vertical-align:middle;
+}
+.cycle {
+
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+    background-color: #1586D0;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+
+    display: -moz-box;
+    -moz-box-orient: horizontal;
+    -moz-box-pack: center;
+    -moz-box-align: center;
+
+    display: -o-box;
+    -o-box-orient: horizontal;
+    -o-box-pack: center;
+    -o-box-align: center;
+
+    display: -ms-box;
+    -ms-box-orient: horizontal;
+    -ms-box-pack: center;
+    -ms-box-align: center;
+
+    display: box;
+    box-orient: horizontal;
+    box-pack: center;
+    box-align: center;
+}
+.cycle p {
+    font-family: Arial;
+    font-size: 50pt;
+    color:#fff;
+}
+.user-text {
+    display:table-cell;
+    vertical-align:middle;
+}
+.user-text ul li {
+    font-family: Arial;
+    color: #fff;
+}
+#welcome {
+    font-size: 20pt;
+    font-weight: bold;
+}
+#showName {
+    font-size: 15pt;
+}
+#showDepartment {
+    font-size: 15pt;
+}
+.menu-bar {
+    padding-top: 100px;
+    width: 100%;
+}
+.menu-bar ul {
+    width:100%;
+}
+.menu-bar li {
+    padding-left: 30px;
+    padding-right: 30px;
+    color: #fff;
+    height: 50px;
+}
+.menu-bar li div{
+    font-family: Arial;
+    height: 50px;
+    font-size: 15pt;
+    text-align: left;
+    line-height: 50px;
+
+}
+.menu-bar li select{
+    -webkit-appearance: button;
+    -webkit-border-radius: 2px;
+    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    -webkit-padding-end: 20px;
+    -webkit-padding-start: 2px;
+    -webkit-user-select: none;
+    background-image: url(../img/select-ico.png), -webkit-linear-gradient(#191C20, #191C20 40%, #191C20);
+    background-position: 97% center;
+    background-repeat: no-repeat;
+    border: none;
+    height: 50px;
+    width: 100%;
+    font-family: Arial;
+    font-size: 15pt;
+    color: #fff;
+    background-color: #191C20;
+}
+.map-box {
+    padding-left: 2%;
+    width: 100%;
+    height: 100%;
+}
+.right-map {
+    float: left;
+    width: 75%;
+    height: 100%;
+    background-color: #E1E6E9;
+}
+.left-box {
+    float: left;
+    width: 40%;
+    height: 100%;
+    background-color: rgba(25, 28, 32, 0.45);
+}
+.right-box {
+    float: left;
+    width: 60%;
+    height: 100%;
+    background-color: #E1E6E9;
+}

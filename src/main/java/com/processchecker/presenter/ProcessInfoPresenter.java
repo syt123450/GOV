@@ -2,7 +2,7 @@ package com.processchecker.presenter;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.processchecker.model.service.ProcessDataHandler;
+import com.processchecker.model.service.ProcessDataProxy;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,16 +23,16 @@ public class ProcessInfoPresenter {
     @RequestMapping("/processes")
     public String getProcessData() {
 
-        ProcessDataHandler processDataHandler = new ProcessDataHandler();
+        ProcessDataProxy processDataProxy = new ProcessDataProxy();
 
-        return gson.toJson(processDataHandler.getProcessesInfo());
+        return processDataProxy.getProcessesInfo();
     }
 
     @RequestMapping("/tasks")
     public String getTasks() {
 
-        ProcessDataHandler processDataHandler = new ProcessDataHandler();
+        ProcessDataProxy processDataProxy = new ProcessDataProxy();
 
-        return gson.toJson(processDataHandler.getTasksInfo(processName));
+        return processDataProxy.getTasksInfo(processName);
     }
 }

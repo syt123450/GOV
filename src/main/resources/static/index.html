@@ -3,12 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
-    <script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index_style.css" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
 </head>
 <body>
-<div id="test">Click Me</div>
+    <div class="wrap">
+        <div class="bg-container">
+        </div>
+        <div class="login-container">
+            <div class="user-box">
+                    <div class="input-container" id="usertype">
+                        <select class="select-box">
+                            <option selected disabled>User Type</option>
+                            <option>Test 1</option>
+                            <option>Test 1</option>
+                            <option>Test 1</option>
+                            <option>Test 1</option>
+                        </select>
+                    </div>
+                    <div class="input-container" id="username">
+                        <!--UserName-->
+                        <input class="input-box" placeholder="Username"/>
+                    </div>
+                    <div class="input-container" id="password">
+                        <!--Password-->
+                        <input class="input-box" type="password" placeholder="Password"/>
+                    </div>
+                    <div class="button-box">
+                        <!--Login Button-->
+                        <button>Login</button>
+                    </div>
+            </div>
+        </div>
+    </div>
 
+<!--
+<div id="test">Click Me</div>
 <script>
 
     $(function() {
@@ -19,6 +49,7 @@
     });
 
 </script>
+-->
 
 </body>
 </html>

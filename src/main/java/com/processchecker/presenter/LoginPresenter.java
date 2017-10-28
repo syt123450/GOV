@@ -21,14 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginPresenter {
 
     private Gson gson = new GsonBuilder().create();
-    @Autowired
-    private LoginHandler loginHandler;
 
     @RequestMapping(value = "/check", method = RequestMethod.POST)
     public String getProcessData(@RequestBody String body) {
 
+        LoginHandler loginHandler = new LoginHandler();
+
         LoginRequestBean requestBean = gson.fromJson(body, LoginRequestBean.class);
 
-        return gson.toJson(loginHandler.authenticate(requestBean));
+        return loginHandler.authenticate(requestBean);
     }
 }
