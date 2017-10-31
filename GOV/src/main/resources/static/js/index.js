@@ -44,6 +44,7 @@ $(function () {
             }),
             dataType: 'json',
             success: function (data) {
+
                 if (data.result == true) {
 
                     localStorage.setItem("name", name);
@@ -51,8 +52,14 @@ $(function () {
                     localStorage.setItem("department", department);
 
                     location.href = "dashBoard.html";
+                } else {
+                    $("#alert-box").show();
                 }
             }
         });
+    });
+
+    $("#close-btn").click(function() {
+        $("#alert-box").hide();
     });
 });

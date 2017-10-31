@@ -38,6 +38,7 @@ public class LoginHandler {
             try {
                 HttpEntity httpEntity = new StringEntity(message);
                 responseContent = Request.Post(requestUrl).body(httpEntity).execute().returnContent().asString();
+                System.out.println(responseContent);
             } catch (Exception e) {
                 e.printStackTrace();
             }

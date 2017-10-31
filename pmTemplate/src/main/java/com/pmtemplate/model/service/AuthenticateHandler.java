@@ -13,7 +13,9 @@ public class AuthenticateHandler {
 
         MySQLUtils mySQLUtils = new MySQLUtils();
         AuthenticationBean authenticationBean = new AuthenticationBean();
-        authenticationBean.setResult(mySQLUtils.authenticateUser(loginRequestBean.getName(), loginRequestBean.getPassword()));
+        authenticationBean.setResult(mySQLUtils.authenticateUser(loginRequestBean.getName(), EncryptHandler.getSHA256StrJava(loginRequestBean.getPassword())));
+
+        System.out.println(authenticationBean);
 
         return authenticationBean;
     }

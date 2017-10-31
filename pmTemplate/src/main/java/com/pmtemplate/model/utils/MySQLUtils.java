@@ -102,8 +102,9 @@ public class MySQLUtils {
 
     public boolean authenticateUser(String userName, String userPassword) {
 
-        String sql = "select USR_USERNAME FROM users WHERE USR_USERNAME = '%s'";
-        String formatSQL = String.format(sql, userName);
+        String sql = "select count(*) FROM users WHERE USR_USERNAME = '%s' AND USR_PASSWORD = '%s'";
+
+        String formatSQL = String.format(sql, userName, userPassword);
 
         boolean result = false;
 
@@ -112,7 +113,8 @@ public class MySQLUtils {
             Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(formatSQL);
-            result = rs.next();
+            rs.next();
+            result = rs.getInt(1) == 1;
             rs.close();
             stmt.close();
             conn.close();
