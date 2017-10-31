@@ -185,4 +185,6 @@ a{
     width: 100px;
     height: 20px;
     color: #fff;
+    display: none;
+    cursor: pointer;
 }

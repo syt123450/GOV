@@ -102,7 +102,7 @@ public class MySQLUtils {
 
     public boolean authenticateUser(String userName, String userPassword) {
 
-        String sql = "select USR_USERNAME FROM users WHERE USR_USERNAME = 'yyy'";
+        String sql = "select USR_USERNAME FROM users WHERE USR_USERNAME = '%s'";
         String formatSQL = String.format(sql, userName);
 
         boolean result = false;

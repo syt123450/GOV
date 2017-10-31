@@ -57,6 +57,7 @@ function createProcessDiagram(nodesinfo) {
         if (params.nodes.length > 0) {
 
             var processName = processNetwork.body.data.nodes._data[params.nodes[0]].label;
+            $("#showAll").show();
             getTasksInfo(processName);
         }
     });
