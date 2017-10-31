@@ -138,3 +138,10 @@ button {
     border: none;
     border-radius: 3pt;
 }
+.alert-box {
+    height: 100%;
+    width: 100%;
+    background: #4c4c4c;
+    opacity: 0.6;
+    z-index: 999;
+}
