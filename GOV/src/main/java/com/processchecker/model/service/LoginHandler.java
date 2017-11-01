@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.processchecker.model.entity.AuthenticationBean;
 import com.processchecker.model.entity.DispatchMessageBean;
+import com.processchecker.model.entity.IntermediateAuthBean;
 import com.processchecker.model.entity.LoginRequestBean;
 import com.processchecker.model.utils.MySQLUtils;
 import org.apache.http.HttpEntity;
@@ -20,30 +21,38 @@ public class LoginHandler {
     private Gson gson = new GsonBuilder().create();
     private String authenticationUrl = "%s/api/check";
 
-    public String authenticate(LoginRequestBean requestBean) {
+    public AuthenticationBean authenticate(LoginRequestBean requestBean) {
 
         String departmentUrl = ResourceHandler.getResourceLocation(requestBean.getDepartment());
+        AuthenticationBean authenticationBean = new AuthenticationBean();
         if (departmentUrl == null) {
-            AuthenticationBean authenticationBean = new AuthenticationBean();
+
             authenticationBean.setResult(false);
 
-            return gson.toJson(authenticationBean);
+            return authenticationBean;
         } else {
             String requestUrl = String.format(authenticationUrl, departmentUrl);
             DispatchMessageBean dispatchMessageBean = new DispatchMessageBean();
             dispatchMessageBean.setName(requestBean.getName());
             dispatchMessageBean.setPassword(requestBean.getPassword());
             String message = gson.toJson(dispatchMessageBean);
-            String responseContent = null;
+
             try {
                 HttpEntity httpEntity = new StringEntity(message);
-                responseContent = Request.Post(requestUrl).body(httpEntity).execute().returnContent().asString();
-                System.out.println(responseContent);
+                String responseContent = Request.Post(requestUrl).body(httpEntity).execute().returnContent().asString();
+                IntermediateAuthBean intermediateAuthBean = gson.fromJson(responseContent, IntermediateAuthBean.class);
+                if (intermediateAuthBean.isResult()) {
+                    authenticationBean.setResult(true);
+                    authenticationBean.setKeyValue(MySQLUtils.getKey(requestBean.getDepartment(), requestBean.getName()));
+                } else {
+                    authenticationBean.setResult(false);
+                }
             } catch (Exception e) {
+                authenticationBean.setResult(false);
                 e.printStackTrace();
             }
 
-            return responseContent;
+            return authenticationBean;
         }
     }
 }

@@ -6,18 +6,26 @@ var processNetwork, taskNetwork, tasksInfo;
 $(function () {
     department = localStorage.getItem("department");
     name = localStorage.getItem("name");
+    keyValue = localStorage.getItem("keyValue");
+
+    if (keyValue != "undefined") {
+        keyHex = CryptoJS.enc.Utf8.parse(keyValue);
+    }
 
     $("#showInfo").text("syt".charAt(0));
     $("#showName").text(name);
     $("#showDepartment").text(department);
 
     $.ajax({
-        url: '/api/' + department + "/processes",
+        url: '/api/' + department + "/processes/" + name,
         type: 'GET',
         contentType: "application/json; charset=utf-8",
         async: true,
-        dataType: 'json',
+        dataType: "text",
         success: function (data) {
+            if (keyValue != "undefined") {
+                data = JSON.parse(decryptDESECB(data));
+            }
             createProcessDiagram(data);
         }
     });
@@ -65,12 +73,15 @@ function createProcessDiagram(nodesinfo) {
 
 function getTasksInfo(processName) {
     $.ajax({
-        url: '/api/' + department + "/" + processName + '/tasks',
+        url: '/api/' + department + "/" + processName + '/tasks/' + name,
         type: 'GET',
         contentType: "application/json; charset=utf-8",
         async: true,
-        dataType: 'json',
+        dataType: "text",
         success: function (data) {
+            if (keyValue != "undefined") {
+                data = JSON.parse(decryptDESECB(data));
+            }
             tasksInfo = data;
             createTasksDiagram();
         }
@@ -132,4 +143,15 @@ function createAllProcessorInfo() {
         nodes: newPoints,
         edges: newRelations
     });
+}
+
+function decryptDESECB(cipheredText) {
+    decrypted = CryptoJS.DES.decrypt({
+        ciphertext: CryptoJS.enc.Base64.parse(cipheredText)
+    }, keyHex, {
+        mode: CryptoJS.mode.ECB,
+        padding: CryptoJS.pad.Pkcs7
+    });
+
+    return decrypted.toString(CryptoJS.enc.Utf8)
 }

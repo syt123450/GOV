@@ -3,12 +3,11 @@ package com.processchecker.model.entity;
 import lombok.Data;
 
 /**
- * Created by ss on 2017/10/21.
+ * Created by ss on 2017/11/1.
  */
 
 @Data
-public class AuthenticationBean {
+public class IntermediateAuthBean {
 
     private boolean result;
-    private String keyValue;
 }

@@ -8,22 +8,36 @@ $(function () {
     password = localStorage.getItem("password");
     department = localStorage.getItem("department");
 
+    if (name != "undefined" && password != "undefined" && department != undefined) {
+        $.ajax({
+            url: '/api/check',
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            async: true,
+            data: JSON.stringify({
+                "name": name,
+                "password": password,
+                "department": department
+            }),
+            dataType: 'json',
+            success: function (data) {
+                if (data.result == true) {
+                    location.href = "dashBoard.html";
+                }
+            }
+        });
+    }
+
     $.ajax({
-        url: '/api/check',
-        type: 'POST',
+        url: '/api/allDepartments',
+        type: 'GET',
         contentType: "application/json; charset=utf-8",
         async: true,
-        data: JSON.stringify({
-            "name": name,
-            "password": password,
-            "department": department
-        }),
         dataType: 'json',
         success: function (data) {
-            if (data.result == true) {
-
-                location.href = "dashBoard.html";
-            }
+            data.forEach(function (departmentName) {
+                $("#departments").append("<option value=" + departmentName + ">" + departmentName + "</option>");
+            });
         }
     });
 
@@ -45,11 +59,12 @@ $(function () {
             dataType: 'json',
             success: function (data) {
 
-                if (data.result == true) {
+                if (data.result) {
 
                     localStorage.setItem("name", name);
                     localStorage.setItem("password", password);
                     localStorage.setItem("department", department);
+                    localStorage.setItem("keyValue", data.keyValue);
 
                     location.href = "dashBoard.html";
                 } else {
@@ -59,7 +74,7 @@ $(function () {
         });
     });
 
-    $("#close-btn").click(function() {
+    $("#close-btn").click(function () {
         $("#alert-box").hide();
     });
 });

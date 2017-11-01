@@ -19,20 +19,22 @@ public class ProcessInfoPresenter {
 
     private Gson gson = new GsonBuilder().create();
 
-    @RequestMapping("/{department}/processes")
-    public String getProcessData(@PathVariable(name = "department") String department) {
+    @RequestMapping("/{department}/processes/{userName}")
+    public String getProcessData(@PathVariable(name = "department") String department,
+                                 @PathVariable(name = "userName") String userName) {
 
         ProcessDataProxy processDataProxy = new ProcessDataProxy();
 
-        return processDataProxy.getProcessesInfo(department);
+        return processDataProxy.getProcessesInfo(department, userName);
     }
 
-    @RequestMapping("/{department}/{process}/tasks")
+    @RequestMapping("/{department}/{process}/tasks/{userName}")
     public String getTasks(@PathVariable(name = "department") String departmentName,
-                           @PathVariable(name = "process") String processName) {
+                           @PathVariable(name = "process") String processName,
+                           @PathVariable(name = "userName") String userName) {
 
         ProcessDataProxy processDataProxy = new ProcessDataProxy();
 
-        return processDataProxy.getTasksInfo(departmentName, processName);
+        return processDataProxy.getTasksInfo(departmentName, processName, userName);
     }
 }

@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.processchecker.model.entity.AuthenticationBean;
 import com.processchecker.model.entity.LoginRequestBean;
 import com.processchecker.model.service.LoginHandler;
+import com.processchecker.model.utils.MySQLUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,13 +24,19 @@ public class LoginPresenter {
 
     private Gson gson = new GsonBuilder().create();
 
+    @RequestMapping("/allDepartments")
+    public String getDepartments() {
+
+        return gson.toJson(MySQLUtils.getDepartments());
+    }
+
     @RequestMapping(value = "/check", method = RequestMethod.POST)
-    public String getProcessData(@RequestBody String body) {
+    public String getCheckUserInfo(@RequestBody String body) {
 
         LoginHandler loginHandler = new LoginHandler();
 
         LoginRequestBean requestBean = gson.fromJson(body, LoginRequestBean.class);
 
-        return loginHandler.authenticate(requestBean);
+        return gson.toJson(loginHandler.authenticate(requestBean));
     }
 }
