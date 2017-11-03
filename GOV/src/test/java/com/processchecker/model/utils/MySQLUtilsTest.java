@@ -37,4 +37,10 @@ public class MySQLUtilsTest {
     public void testGetDepartments() {
         System.out.println(MySQLUtils.getDepartments());
     }
+
+    @Test
+    @Ignore
+    public void testCreateInstance() {
+        MySQLUtils.createInstance("hello", "world");
+    }
 }

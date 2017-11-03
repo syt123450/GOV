@@ -126,4 +126,21 @@ public class MySQLUtils {
 
         return departments;
     }
+
+    public static void createInstance(String departmentName, String address) {
+        String sql = "insert into resource values ('%s', '%s')";
+
+        String formatSQL = String.format(sql, departmentName, address);
+
+        try {
+
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(formatSQL);
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -79,6 +79,7 @@ function getTasksInfo(processName) {
         async: true,
         dataType: "text",
         success: function (data) {
+            console.log(data);
             if (keyValue != "undefined") {
                 data = JSON.parse(decryptDESECB(data));
             }
