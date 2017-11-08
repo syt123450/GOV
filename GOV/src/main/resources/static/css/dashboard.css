@@ -150,8 +150,62 @@ a{
     display: none;
     width: 100%;
     height: 200px;
+}
+/*--Switch button----*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 20px;
+}
+
+.switch input {display:none;}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 0px;
+    bottom: 0px;
+    background-color: white;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+
+input:checked + .slider {
     background-color: #73BE5F;
 }
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #73BE5F;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(10px);
+}
+.slider.round {
+    border-radius: 20px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+/*-------------*/
 .map-box {
     padding-left: 2%;
     width: 100%;
@@ -187,3 +241,6 @@ a{
     display: none;
     cursor: pointer;
 }
+
+
+
