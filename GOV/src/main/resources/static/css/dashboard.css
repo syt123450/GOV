@@ -149,12 +149,17 @@ a{
 #em-box {
     display: none;
     width: 100%;
-    height: 200px;
+    height: 80px;
+}
+#switch-left-text {
+    float:left;
 }
 /*--Switch button----*/
 .switch {
+    margin-top: 15px;
     position: relative;
     display: inline-block;
+    float: right;
     width: 30px;
     height: 20px;
 }
@@ -206,6 +211,30 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 /*-------------*/
+#input-box {
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 30px;
+    width: 60%;
+    font-family: Arial;
+    font-size: 15pt;
+    color: #4c4c4c;
+    border: none;
+    border-radius: 3px;
+}
+#submit-btn {
+    float:right;
+    margin-right: -5px;
+    height: 30px;
+    width: 65px;
+    border-style: none;
+    border-radius: 3px;
+    font-family: Arial;
+    font-size: 12pt;
+    color: #fff;
+    background-color: #73BE5F;
+}
 .map-box {
     padding-left: 2%;
     width: 100%;
