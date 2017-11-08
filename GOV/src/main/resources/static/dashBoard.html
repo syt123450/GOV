@@ -13,6 +13,14 @@
     <script src="js/lib/mode-ecb.js"></script>
     <script src="js/lib/enc-base64.js"></script>
     <script src="js/dashBoard.js"></script>
+    <script>
+        $(document).ready(function(){
+            "use strict";
+            $("#em-button").click(function(){
+                $("#em-box").slideToggle("slow");
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="wrap">
@@ -41,13 +49,11 @@
                     <div><a href="http://localhost:8080">ProcessMaker</a></div>
                 </li>
                 <li>
-                    <select>
-                        <option selected disabled>Encryption Mode</option>
-                        <option>Test 1</option>
-                        <option>Test 1</option>
-                        <option>Test 1</option>
-                        <option>Test 1</option>
-                    </select>
+                    <div id="encryption-mode">
+                        <div id="em-button">Encryption Mode</div>
+                        <div id="em-box"></div>
+                    </div>
+
                 </li>
                 <li>
                     <div id="logout">Logout</div>
