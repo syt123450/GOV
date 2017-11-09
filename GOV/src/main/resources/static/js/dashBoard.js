@@ -58,7 +58,16 @@ $(function () {
     $("#em-button").click(function(){
         $("#em-box").slideToggle("slow");
     });
+
+    // $("#submit-btn").click(function() {
+    //     var checker = getStringLenght($("#input-box").val());
+    //     if(!checker) {
+    //         $('#info-area').text("Encryption is Invalid");
+    //         $('#alert-box').show();
+    //     }
+    // });
 });
+
 
 function updateEncryptionConfig(keyValue) {
     localStorage.setItem("keyValue", keyValue);
@@ -199,3 +208,8 @@ function decryptDESECB(cipheredText) {
 
     return decrypted.toString(CryptoJS.enc.Utf8)
 }
+
+// function getStringLenght(str) {
+//     if(str === null || str.length === 8) return false;
+//     return true;
+// }
