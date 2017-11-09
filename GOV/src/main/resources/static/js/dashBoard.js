@@ -40,7 +40,40 @@ $(function () {
     $("#showAll").click(function () {
         createAllProcessorInfo();
     });
+
+    $("#submit-btn").click(function() {
+        if ($("#encryptionSwitch").prop('checked')) {
+            updateEncryptionConfig($("#input-box").val());
+        } else {
+            disableEncryptionConfig();
+        }
+    })
 });
+
+function updateEncryptionConfig(keyValue) {
+    localStorage.setItem("keyValue", keyValue);
+    $.ajax({
+        url: '/api/update',
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        async: true,
+        data: JSON.stringify({
+            "department": department,
+            "userName": name,
+            "cipherText": keyValue
+        })
+    });
+}
+
+function disableEncryptionConfig() {
+    localStorage.removeItem("keyValue");
+    $.ajax({
+        url: '/api/disable/' + department + "/" + name,
+        type: 'GET',
+        contentType: "application/json; charset=utf-8",
+        async: true
+    });
+}
 
 function createProcessDiagram(nodesinfo) {
 
