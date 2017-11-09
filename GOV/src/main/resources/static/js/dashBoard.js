@@ -55,21 +55,11 @@ $(function () {
         }
     }).attr("checked", keyValue != "undefined");
 
-    $("#em-button").click(function() {
+    $("#em-button").click(function(){
         $("#em-box").slideToggle("slow");
     });
-    $("#submit-btn").click(function() {
-        var check = getStringLength($("#input-box").val());
-        if (!check) {
-            $("#errorMessage").text("Encryption Length InValid");
-            $("#alert-box").show();
-        }
-    })
 });
-function getStringLength(str) {
-    if(str === null || str.length != 0) return false;
-    else return true;
-}
+
 function updateEncryptionConfig(keyValue) {
     localStorage.setItem("keyValue", keyValue);
     $.ajax({
