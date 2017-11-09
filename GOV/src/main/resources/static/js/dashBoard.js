@@ -23,8 +23,12 @@ $(function () {
         async: true,
         dataType: "text",
         success: function (data) {
-            if (keyValue != "undefined") {
+            console.log(data);
+            console.log(keyValue);
+            if (keyValue != null) {
                 data = JSON.parse(decryptDESECB(data));
+            } else {
+                data = JSON.parse(data);
             }
             createProcessDiagram(data);
         }
@@ -53,10 +57,14 @@ $(function () {
             $("#config-area").slideUp();
             disableEncryptionConfig();
         }
-    }).attr("checked", keyValue != "undefined");
+    }).attr("checked", keyValue != null);
 
-    $("#em-button").click(function(){
+    $("#em-button").click(function () {
         $("#em-box").slideToggle("slow");
+    });
+
+    $("#close-btn").click(function() {
+        $("#alert-box").hide();
     });
 });
 
@@ -71,8 +79,16 @@ function updateEncryptionConfig(keyValue) {
             "department": department,
             "userName": name,
             "cipherText": keyValue
-        })
+        }),
+        success: function () {
+            showInfo("Successfully update the cipher key.");
+        }
     });
+}
+
+function showInfo(info) {
+    $("#info-area").text(info);
+    $("#alert-box").show();
 }
 
 function disableEncryptionConfig() {
@@ -83,6 +99,7 @@ function disableEncryptionConfig() {
         contentType: "application/json; charset=utf-8",
         async: true
     });
+    showInfo("Successfully close cipher function.");
 }
 
 function createProcessDiagram(nodesinfo) {
@@ -123,8 +140,10 @@ function getTasksInfo(processName) {
         dataType: "text",
         success: function (data) {
             console.log(data);
-            if (keyValue != "undefined") {
+            if (keyValue != null) {
                 data = JSON.parse(decryptDESECB(data));
+            } else {
+                data = JSON.parse(data);
             }
             tasksInfo = data;
             createTasksDiagram();
