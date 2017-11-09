@@ -265,11 +265,16 @@ input:checked + .slider:before {
     right: 20px;
     background-color: rgba(25, 28, 32, 0.45);
     width: 100px;
-    height: 20px;
+    height: 30px;
+    line-height: 30px;
     color: #fff;
     display: none;
     cursor: pointer;
 }
 
+#config-area {
+    width: 100%;
+    display: none;
+}
 
 

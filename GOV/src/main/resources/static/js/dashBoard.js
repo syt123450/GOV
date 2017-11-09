@@ -12,7 +12,7 @@ $(function () {
         keyHex = CryptoJS.enc.Utf8.parse(keyValue);
     }
 
-    $("#showInfo").text("syt".charAt(0));
+    $("#showInfo").text(name.charAt(0));
     $("#showName").text(name);
     $("#showDepartment").text(department);
 
@@ -41,13 +41,19 @@ $(function () {
         createAllProcessorInfo();
     });
 
-    $("#submit-btn").click(function() {
-        if ($("#encryptionSwitch").prop('checked')) {
-            updateEncryptionConfig($("#input-box").val());
+    $("#submit-btn").click(function () {
+        updateEncryptionConfig($("#input-box").val());
+        $("#config-area").slideUp();
+    });
+
+    $("#encryptionSwitch").click(function () {
+        if ($(this).prop('checked')) {
+            $("#config-area").slideDown();
         } else {
+            $("#config-area").slideUp();
             disableEncryptionConfig();
         }
-    })
+    }).attr("checked", keyValue != "undefined");
 });
 
 function updateEncryptionConfig(keyValue) {
@@ -135,7 +141,7 @@ function createTasksDiagram() {
             size: 30,
             font: {
                 size: 16,
-                color: '#ffffff'
+                color: '#434d55'
             },
             borderWidth: 2
         }
