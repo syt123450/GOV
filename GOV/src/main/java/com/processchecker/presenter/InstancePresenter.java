@@ -21,7 +21,7 @@ public class InstancePresenter {
     private Gson gson = new GsonBuilder().create();
 
     @RequestMapping("/create")
-    public void updateCypherConfig(@RequestBody String body) {
+    public void createDepartment(@RequestBody String body) {
         CreationBean creationBean = gson.fromJson(body, CreationBean.class);
         CreationHandler creationHandler = new CreationHandler();
         creationHandler.create(creationBean);

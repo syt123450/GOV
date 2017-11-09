@@ -54,6 +54,10 @@ $(function () {
             disableEncryptionConfig();
         }
     }).attr("checked", keyValue != "undefined");
+
+    $("#em-button").click(function(){
+        $("#em-box").slideToggle("slow");
+    });
 });
 
 function updateEncryptionConfig(keyValue) {
