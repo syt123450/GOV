@@ -1,0 +1,10 @@
+@startuml
+
+left to right direction
+actor admin
+rectangle "Central System" {
+  admin -- (Gateway)
+  (Gateway) .> (Creation Handler)
+}
+
+@enduml

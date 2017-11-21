@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor user
+rectangle "Central System" {
+  user -- (Gateway)
+
+}
+@enduml

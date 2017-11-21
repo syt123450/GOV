@@ -133,6 +133,7 @@ a{
 #model {
     background: #fff;
     color:#191C20;
+    cursor: default;
 }
 .menu-bar a {
     color:#fff;

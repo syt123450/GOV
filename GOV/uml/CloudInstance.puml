@@ -1,0 +1,18 @@
+@startuml
+
+cloud "cloud instance" {
+package "handler" {
+    [PM]
+    [PM_model]
+}
+
+database "DB" {
+    [PM_data]
+}
+
+[PM] --> [PM_data]
+[PM_model] --> [PM_data]
+
+}
+
+@enduml

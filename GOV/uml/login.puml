@@ -1,0 +1,14 @@
+@startuml
+left to right direction
+actor user
+rectangle "Central System" {
+  user -- (Gateway)
+  (Gateway) .> (Authentication Proxy)
+}
+
+rectangle "Cloud Instance" {
+
+   (Authentication Proxy) .> (Authentication Handler)
+}
+
+@enduml

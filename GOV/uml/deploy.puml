@@ -1,0 +1,62 @@
+@startuml
+
+cloud "Central Cloud" {
+package "Central System" {
+
+[Gateway] --> [Route]
+[Gateway] --> [modularization]
+[Gateway] --> [Encryption]
+[Gateway] --> [Authentication]
+
+}
+
+database "Resource Management DB" {
+
+    [Resource Info]
+    [Encryption Info]
+}
+
+[Authentication] -right-> [Resource Info]
+[Encryption] -right-> [Encryption Info]
+
+
+}
+
+
+cloud "HAD cloud instance" {
+package "HAD handler" {
+    [HAD_PM]
+    [HAD_PM_model]
+}
+
+database "HAD DB" {
+    [HAD_PM_data]
+}
+
+[HAD_PM] --> [HAD_PM_data]
+[HAD_PM_model] --> [HAD_PM_data]
+
+}
+
+cloud "IDD cloud instance" {
+
+package "IDD handler" {
+    [IDD_PM]
+    [IDD_PM_model]
+}
+
+database "IDD DB" {
+    [IDD_PM_data]
+}
+
+[IDD_PM] --> [IDD_PM_data]
+[IDD_PM_model] --> [IDD_PM_data]
+
+}
+
+[Route] -right-> [HAD_PM]
+[Route] -right-> [IDD_PM]
+[modularization] -right-> [HAD_PM_model]
+[modularization] -right-> [IDD_PM_model]
+
+@enduml

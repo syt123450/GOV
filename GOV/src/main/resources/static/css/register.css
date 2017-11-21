@@ -144,7 +144,7 @@ button {
     position: absolute;
     top: 0;
     left: 0;
-    display: block;
+    display: none;
     height: 100%;
     width: 100%;
 

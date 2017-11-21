@@ -1,6 +1,7 @@
 /**
  * Created by ss on 2017/10/29.
  */
+
 var processNetwork, taskNetwork, tasksInfo;
 
 $(function () {
@@ -23,8 +24,12 @@ $(function () {
         async: true,
         dataType: "text",
         success: function (data) {
-            if (keyValue != "undefined") {
+            console.log(data);
+            console.log(keyValue);
+            if (keyValue != null) {
                 data = JSON.parse(decryptDESECB(data));
+            } else {
+                data = JSON.parse(data);
             }
             createProcessDiagram(data);
         }
@@ -42,8 +47,13 @@ $(function () {
     });
 
     $("#submit-btn").click(function () {
-        updateEncryptionConfig($("#input-box").val());
-        $("#config-area").slideUp();
+        var inputText = $("#input-box").val();
+        if (validateString(inputText)) {
+            showInfo("You must input 8 characters as cipher key.");
+        } else {
+            updateEncryptionConfig(inputText);
+            $("#config-area").slideUp();
+        }
     });
 
     $("#encryptionSwitch").click(function () {
@@ -53,21 +63,16 @@ $(function () {
             $("#config-area").slideUp();
             disableEncryptionConfig();
         }
-    }).attr("checked", keyValue != "undefined");
+    }).attr("checked", keyValue != null);
 
-    $("#em-button").click(function(){
+    $("#em-button").click(function () {
         $("#em-box").slideToggle("slow");
     });
 
-    // $("#submit-btn").click(function() {
-    //     var checker = getStringLenght($("#input-box").val());
-    //     if(!checker) {
-    //         $('#info-area').text("Encryption is Invalid");
-    //         $('#alert-box').show();
-    //     }
-    // });
+    $("#close-btn").click(function() {
+        $("#alert-box").hide();
+    });
 });
-
 
 function updateEncryptionConfig(keyValue) {
     localStorage.setItem("keyValue", keyValue);
@@ -80,8 +85,16 @@ function updateEncryptionConfig(keyValue) {
             "department": department,
             "userName": name,
             "cipherText": keyValue
-        })
+        }),
+        success: function () {
+            showInfo("Successfully update the cipher key.");
+        }
     });
+}
+
+function showInfo(info) {
+    $("#info-area").text(info);
+    $("#alert-box").show();
 }
 
 function disableEncryptionConfig() {
@@ -92,6 +105,7 @@ function disableEncryptionConfig() {
         contentType: "application/json; charset=utf-8",
         async: true
     });
+    showInfo("Successfully close cipher function.");
 }
 
 function createProcessDiagram(nodesinfo) {
@@ -132,8 +146,10 @@ function getTasksInfo(processName) {
         dataType: "text",
         success: function (data) {
             console.log(data);
-            if (keyValue != "undefined") {
+            if (keyValue != null) {
                 data = JSON.parse(decryptDESECB(data));
+            } else {
+                data = JSON.parse(data);
             }
             tasksInfo = data;
             createTasksDiagram();
@@ -209,7 +225,7 @@ function decryptDESECB(cipheredText) {
     return decrypted.toString(CryptoJS.enc.Utf8)
 }
 
-// function getStringLenght(str) {
-//     if(str === null || str.length === 8) return false;
-//     return true;
-// }
+function validateString(str) {
+    if(str === null || str.length === 8) return false;
+    return true;
+}

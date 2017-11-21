@@ -13,13 +13,16 @@ $(function() {
             async: true,
             data: JSON.stringify({
                 "departmentName": $("#department-name").val()
-            }),
-            // dataType: 'json',
-            success: function (data) {
-                // if (data.result == true) {
-                //     location.href = "dashBoard.html";
-                // }
-            }
+            })
         });
+        showResult();
+    });
+
+    $("#close-btn").click(function() {
+        $("#alert-box").hide();
     });
 });
+
+function showResult() {
+    $("#alert-box").show();
+}

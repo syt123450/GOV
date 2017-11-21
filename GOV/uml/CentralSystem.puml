@@ -1,0 +1,25 @@
+@startuml
+
+cloud "Central Cloud" {
+package "Central System" {
+
+[Gateway] --> [Route]
+[Gateway] --> [modularization]
+[Gateway] --> [Encryption]
+[Gateway] --> [Authentication]
+
+}
+
+database "Resource Management DB" {
+
+    [Resource Info]
+    [Encryption Info]
+}
+
+[Authentication] -right-> [Resource Info]
+[Encryption] -right-> [Encryption Info]
+
+
+}
+
+@enduml
