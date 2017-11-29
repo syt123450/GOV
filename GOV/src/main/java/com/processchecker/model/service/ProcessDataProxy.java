@@ -10,8 +10,8 @@ import org.apache.http.client.fluent.Request;
 
 public class ProcessDataProxy {
 
-    private String processUrl = "%s/api/processes";
-    private String taskUrl = "%s/api/%s/tasks";
+    private String processUrl = "%s:6000/api/processes";
+    private String taskUrl = "%s:6000/api/%s/tasks";
 
     public String getProcessesInfo(String departmentName, String userName) {
 

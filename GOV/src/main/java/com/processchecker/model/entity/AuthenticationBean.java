@@ -11,4 +11,5 @@ public class AuthenticationBean {
 
     private boolean result;
     private String keyValue;
+    private String departmentResource;
 }

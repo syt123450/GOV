@@ -65,6 +65,7 @@ $(function () {
                     localStorage.setItem("password", password);
                     localStorage.setItem("department", department);
                     localStorage.setItem("keyValue", data.keyValue);
+                    localStorage.setItem("departmentResource", data.departmentResource);
 
                     location.href = "dashBoard.html";
                 } else {

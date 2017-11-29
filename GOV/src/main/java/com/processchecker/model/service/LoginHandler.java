@@ -19,19 +19,24 @@ import org.springframework.stereotype.Component;
 public class LoginHandler {
 
     private Gson gson = new GsonBuilder().create();
-    private String authenticationUrl = "%s/api/check";
+    private String authenticationUrl = "%s:6000/api/check";
 
     public AuthenticationBean authenticate(LoginRequestBean requestBean) {
+
+        System.out.println(requestBean.getDepartment());
 
         String departmentUrl = ResourceHandler.getResourceLocation(requestBean.getDepartment());
         AuthenticationBean authenticationBean = new AuthenticationBean();
         if (departmentUrl == null) {
+
+            System.out.println(departmentUrl);
 
             authenticationBean.setResult(false);
 
             return authenticationBean;
         } else {
             String requestUrl = String.format(authenticationUrl, departmentUrl);
+            System.out.println(requestUrl);
             DispatchMessageBean dispatchMessageBean = new DispatchMessageBean();
             dispatchMessageBean.setName(requestBean.getName());
             dispatchMessageBean.setPassword(requestBean.getPassword());
@@ -40,10 +45,12 @@ public class LoginHandler {
             try {
                 HttpEntity httpEntity = new StringEntity(message);
                 String responseContent = Request.Post(requestUrl).body(httpEntity).execute().returnContent().asString();
+                System.out.println(responseContent);
                 IntermediateAuthBean intermediateAuthBean = gson.fromJson(responseContent, IntermediateAuthBean.class);
                 if (intermediateAuthBean.isResult()) {
                     authenticationBean.setResult(true);
                     authenticationBean.setKeyValue(MySQLUtils.getKey(requestBean.getDepartment(), requestBean.getName()));
+                    authenticationBean.setDepartmentResource(departmentUrl);
                 } else {
                     authenticationBean.setResult(false);
                 }

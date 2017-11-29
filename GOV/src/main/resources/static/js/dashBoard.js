@@ -8,6 +8,7 @@ $(function () {
     department = localStorage.getItem("department");
     name = localStorage.getItem("name");
     keyValue = localStorage.getItem("keyValue");
+    departmentResource = localStorage.getItem("departmentResource");
 
     if (keyValue != "undefined") {
         keyHex = CryptoJS.enc.Utf8.parse(keyValue);
@@ -26,7 +27,7 @@ $(function () {
         success: function (data) {
             console.log(data);
             console.log(keyValue);
-            if (keyValue != null) {
+            if (keyValue != "undefined") {
                 data = JSON.parse(decryptDESECB(data));
             } else {
                 data = JSON.parse(data);
@@ -72,6 +73,8 @@ $(function () {
     $("#close-btn").click(function() {
         $("#alert-box").hide();
     });
+
+    $("#router").attr("href", departmentResource);
 });
 
 function updateEncryptionConfig(keyValue) {
