@@ -1,0 +1,9 @@
+@startuml
+left to right direction
+actor "Illegal Dumping Department" as idd
+actor "Homeless Assistance Department" as HAD
+rectangle "Central System" {
+  idd -- (Gateway)
+  HAD -- (Gateway)
+}
+@enduml
