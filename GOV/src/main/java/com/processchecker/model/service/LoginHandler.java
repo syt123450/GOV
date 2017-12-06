@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 public class LoginHandler {
 
     private Gson gson = new GsonBuilder().create();
-    private String authenticationUrl = "%s:6000/api/check";
+    private String authenticationUrl = "%s:8080/api/check";
 
     public AuthenticationBean authenticate(LoginRequestBean requestBean) {
 

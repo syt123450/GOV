@@ -27,10 +27,10 @@ $(function () {
         success: function (data) {
             console.log(data);
             console.log(keyValue);
-            if (keyValue != "undefined") {
-                data = JSON.parse(decryptDESECB(data));
-            } else {
+            if (keyValue == "undefined" || keyValue == null) {
                 data = JSON.parse(data);
+            } else {
+                data = JSON.parse(decryptDESECB(data));
             }
             createProcessDiagram(data);
         }
@@ -149,10 +149,10 @@ function getTasksInfo(processName) {
         dataType: "text",
         success: function (data) {
             console.log(data);
-            if (keyValue != "undefined") {
-                data = JSON.parse(decryptDESECB(data));
-            } else {
+            if (keyValue == "undefined" || keyValue == null) {
                 data = JSON.parse(data);
+            } else {
+                data = JSON.parse(decryptDESECB(data));
             }
             tasksInfo = data;
             createTasksDiagram();
